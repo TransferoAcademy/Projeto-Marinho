@@ -5,7 +5,7 @@ import os
 
 
 driver = webdriver.Chrome()
-# maximizar a janela, por padrão abre reduzida
+# maximizar a janela, por padrão abre reduzida. Como é uma automação essa linha pode ficar comentada sem problema.
 driver.maximize_window()
 
 # Preço Bitcoin
