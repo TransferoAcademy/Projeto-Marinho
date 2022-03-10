@@ -1,34 +1,36 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
+import datetime
+import sys
 import os
 
 
 driver = webdriver.Chrome()
-# maximizar a janela, por padrão abre reduzida. Como é uma automação essa linha pode ficar comentada sem problema.
+# maximizar a janela, por padrão abre reduzida
 driver.maximize_window()
 
 # Preço Bitcoin
 driver.get('https://www.coingecko.com/pt')
-driver.find_element_by_xpath("/html/body/div[2]/div[4]/div[6]/div[1]/div/table/tbody/tr[1]/td[3]").click()
-preco_bitcoin = driver.find_element_by_xpath('/html/body/div[3]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
+driver.find_element_by_xpath("/html/body/div[4]/div[4]/div[6]/div[1]/div/table/tbody/tr[1]/td[3]").click()
+preco_bitcoin = driver.find_element_by_xpath('/html/body/div[5]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
 
 # Preço Ethereum
 driver.get('https://www.coingecko.com/pt/moedas/ethereum')
-preco_eth = driver.find_element_by_xpath('/html/body/div[3]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
+preco_eth = driver.find_element_by_xpath('/html/body/div[5]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
 
 # Preço BNB
 driver.get('https://www.coingecko.com/pt/moedas/bnb')
-preco_bnb = driver.find_element_by_xpath('/html/body/div[3]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
+preco_bnb = driver.find_element_by_xpath('/html/body/div[5]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
 
 # Preço XRP
 driver.get('https://www.coingecko.com/pt/moedas/xrp')
-preco_xrp = driver.find_element_by_xpath('/html/body/div[3]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
+preco_xrp = driver.find_element_by_xpath('/html/body/div[5]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
     
 
 # Preço Cardano
 driver.get('https://www.coingecko.com/pt/moedas/cardano')
-preco_ada = driver.find_element_by_xpath('/html/body/div[3]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
+preco_ada = driver.find_element_by_xpath('/html/body/div[5]/div[4]/div[1]/div/div[1]/div[3]/div/div[1]/span[1]/span').get_attribute("data-price-previous")
 
 
 # Captando o valor do Dólar
@@ -55,4 +57,6 @@ preco.insert(3, "Dia", datetime.date.today())
 if os.path.exists(f'./moedas{datetime.date.today()}.xlsx') == False:
     preco.to_excel(f'moedas{datetime.date.today()}.xlsx', index = False)
 else:
-    break
+    sys.exit()
+
+
